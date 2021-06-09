@@ -1,0 +1,185 @@
+\usepackage[utf8]{inputenc}
+\usepackage[magyar,english]{babel}
+\usepackage[T1]{fontenc}
+
+%----------------------------------------------------------------------------------------
+%	MATH PACKAGES
+%----------------------------------------------------------------------------------------
+
+\usepackage{amsmath, amssymb, mathrsfs}
+\usepackage{mathtools}
+\usepackage{cancel}
+\usepackage{braket}
+
+\numberwithin{equation}{section}		% Number equations per-section basis instead of per-document
+
+%----------------------------------------------------------------------------------------
+%	SPECIFIC FOR CURRENT DOCUMENT
+%----------------------------------------------------------------------------------------
+
+\usepackage{listings}
+
+%----------------------------------------------------------------------------------------
+%	DEFINING NEW FUNCTIONS
+%----------------------------------------------------------------------------------------
+
+% --------- MATH MODE ---------
+% Banish bad characters from this realm
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+
+% Trigonometrial operators
+\DeclareMathOperator{\arcsinh}{arcsinh}
+
+% \cdot instead of asterisk (*) symbol
+\mathcode`\*="8000
+{\catcode`\*\active\gdef*{\cdot}}
+
+% Double underline
+\def\doubleunderline#1{\underline{\underline{#1}}}
+
+% Derivate
+\newcommand{\D}[1]{\ensuremath{\operatorname{d}{#1}}}
+\newcommand{\Dcb}[1]{\ensuremath{\operatorname{d}^{3}{#1}}}
+\newcommand{\Df}[2]{\ensuremath{\frac{\operatorname{d}{#1}}{\operatorname{d}{#2}}}}
+\newcommand{\Dfsq}[2]{\ensuremath{\frac{\operatorname{d}^{2}{#1}}{\operatorname{d}{#2}^{2}}}}
+
+% --------- OTHER ---------
+% Quotes
+\usepackage[autostyle=false]{csquotes}
+\newcommand{\q}[1]{„#1''} % Redefine quotations
+
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT FORMATTING
+%----------------------------------------------------------------------------------------
+
+% Two columns
+\usepackage{multicol}
+\setlength\columnsep{30pt}
+
+% Spacing and indentation
+% First paragraph is indented after titles
+\usepackage{indentfirst}
+\setlength{\parindent}{20pt} % Indentation of paragraphs
+\setlength{\parskip}{3pt}    % Skip between paragraphs (/par)
+
+% Line spacing
+\usepackage{setspace}
+\onehalfspacing
+
+% Main- and subsections' titles (\section and \subsection)
+\usepackage{titlesec}
+\renewcommand{\thesection}{\Roman{section}}
+\titleformat{\section}{\bfseries\Large}{\thesection. }{0em}{}
+\titleformat{\subsection}{\bfseries\large}{\thesubsection. }{0em}{}
+
+
+%----------------------------------------------------------------------------------------
+%	OTHERS
+%----------------------------------------------------------------------------------------
+
+\usepackage[final]{pdfpages}
+
+% Hyperlinks
+\usepackage[unicode]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    citecolor = cyan,
+    pdftitle={pal-balazs-high-energy-2021}
+}
+
+% Color
+\usepackage{color}
+
+% Tables
+% Multirow cell
+\usepackage{makecell}
+
+% Inserting images
+\usepackage{graphicx}	% Adds optional arguments for \includegraphics
+\usepackage{wrapfig}		% Makes text wrapping around image available
+\usepackage[
+	skip=2pt,
+	font={small},
+	labelfont=bf,
+	justification=justified,
+	format=plain
+]{caption}	% Fig caption configuration
+\graphicspath{{/home/masterdesky/GitHub/ELTE_High_Energy_2021/project/analyzetree/figs/}}
+
+% Fit large images to same page with section titles
+\renewcommand{\textfraction}{0.01}
+
+% Custom footnote text
+\newcommand{\customfootnotetext}[2]{{	% Group to localize change to footnote
+	\renewcommand{\thefootnote}{#1}		% Update footnote counter representation
+	\footnotetext[0]{#2}					% Print footnote text
+}} 
+
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+% Using biblatex with bibtex backend and natbib citation styles (natbib=true, backend=bibtex)
+% In bibliography, citations are numbered by appearance (bibstyle=numeric)
+\usepackage[citestyle=authoryear, bibstyle=numeric, natbib=true, backend=bibtex, sorting=none]{biblatex}
+\addbibresource{bib/bibliography.bib}
+
+% Hyperlink both author and year in citations
+% Taken from stackexchange: https://tex.stackexchange.com/questions/1687/hyperlink-name-with-biblatex-authoryear/25972
+% The answer originates from here: https://groups.google.com/forum/#!topic/comp.text.tex/rSPhG2jd3Ks
+\DeclareCiteCommand{\cite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\cite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{citeyear}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+    \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+    \printtext[bibhyperref]{\usebibmacro{citeyear}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\footcite}[\mkbibfootnote]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+  \printtext[bibhyperref]{ \usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\footcitetext}[\mkbibfootnotetext]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\textcite}
+  {\boolfalse{cbx:parens}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{textcite}}}
+  {\ifbool{cbx:parens}
+     {\bibcloseparen\global\boolfalse{cbx:parens}}
+     {}%
+   \multicitedelim}
+  {\usebibmacro{textcite:postnote}}

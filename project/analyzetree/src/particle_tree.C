@@ -7,7 +7,7 @@
 
 #define particle_tree_cxx
 #include "particle_tree.h"
-#include <TH2.h>
+#include <TH1.h>
 #include <TStyle.h>
 #include <TCanvas.h>
 #include <string>

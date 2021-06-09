@@ -8,12 +8,12 @@ BinDir = ../bin
 ObjDir = $(BinDir)/object
 DepDir = $(ObjDir)/dependencies
 
-CXX     = g++
-LD      = g++
+CXX     = clang++
+LD      = clang++
 ROOTCFLAGS   := $(shell root-config --cflags)
 ROOTLIBS     := $(shell root-config --libs) -lMinuit
 CFLAGS  = -O3 -Wall -fPIC -fno-inline $(ROOTCFLAGS) -I$(WrkDir)/$(RdrDir)
-LDFLAGS = -O3 -m32 # beware -m32 may have to be deleted/added
+LDFLAGS = -O3 #-m32 # beware -m32 may have to be deleted/added
 
 COMMON_SOURCES = particle_tree.C
 COMMON_OBJECTS = $(addprefix $(ObjDir)/, $(addsuffix .o,$(notdir $(basename $(COMMON_SOURCES)))))
@@ -29,7 +29,7 @@ endef
 $(foreach source, $(ALL_SOURCES), $(eval $(call COMPILE_TEMPLATE,$(source))))
 
 define FINAL_LINK_TEMPLATE
-$(ExeDir)/$(1).exe: $(2) $(ObjDir)/$(1).o
+$(BinDir)/$(1): $(2) $(ObjDir)/$(1).o
 	@echo ""
 	$(LD) $(LDFLAGS) $$^ $(ROOTLIBS) $(SYSLIBS) -o $$@
 endef
@@ -38,4 +38,4 @@ $(foreach program, $(PROGRAMS), $(eval $(call FINAL_LINK_TEMPLATE,$(program),$(C
 #all: $(addprefix $(ExeDir)/,$(addsuffix .exe, $(PROGRAMS)))
 
 clean:
-	@rm -f $(BinDir)/*.exe $(ObjDir)/*.o $(DepDir)/*.d
+	@rm -f $(BinDir)/* $(ObjDir)/*.o $(DepDir)/*.d
