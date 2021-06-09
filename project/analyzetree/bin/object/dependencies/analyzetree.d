@@ -273,15 +273,16 @@
   /usr/local/include/TFitResultPtr.h /usr/local/include/TGraph.h \
   /usr/local/include/TGraphErrors.h /usr/local/include/TMarker.h \
   /usr/local/include/TAttBBox2D.h /usr/local/include/GuiTypes.h \
-  /usr/local/include/TStyle.h /usr/local/include/TAttText.h \
+  /usr/local/include/TLegend.h /usr/local/include/TPave.h \
+  /usr/local/include/TBox.h /usr/local/include/TPoint.h \
+  /usr/local/include/TAttText.h /usr/local/include/TStyle.h \
   /usr/local/include/TColor.h /usr/local/include/TCanvas.h \
   /usr/local/include/TPad.h /usr/local/include/TVirtualPad.h \
   /usr/local/include/TAttPad.h /usr/local/include/TQObject.h \
   /usr/local/include/TList.h /usr/local/include/TSeqCollection.h \
   /usr/local/include/TCollection.h /usr/local/include/TIterator.h \
   /usr/local/include/TVirtualQConnection.h /usr/local/include/Buttons.h \
-  /usr/local/include/TPoint.h /usr/local/include/TAttCanvas.h \
-  /usr/local/include/TCanvasImp.h \
+  /usr/local/include/TAttCanvas.h /usr/local/include/TCanvasImp.h \
   /home/masterdesky/GitHub/ELTE_High_Energy_2021/project/analyzetree/src/particle_tree.h \
   /usr/local/include/TROOT.h /usr/local/include/TDirectory.h \
   /usr/local/include/TClass.h /usr/local/include/TObjArray.h \
@@ -933,9 +934,17 @@
 
 /usr/local/include/GuiTypes.h:
 
-/usr/local/include/TStyle.h:
+/usr/local/include/TLegend.h:
+
+/usr/local/include/TPave.h:
+
+/usr/local/include/TBox.h:
+
+/usr/local/include/TPoint.h:
 
 /usr/local/include/TAttText.h:
+
+/usr/local/include/TStyle.h:
 
 /usr/local/include/TColor.h:
 
@@ -960,8 +969,6 @@
 /usr/local/include/TVirtualQConnection.h:
 
 /usr/local/include/Buttons.h:
-
-/usr/local/include/TPoint.h:
 
 /usr/local/include/TAttCanvas.h:
 

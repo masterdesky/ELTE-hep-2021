@@ -8,6 +8,7 @@ void plot_analyzetree(const char* filename, const char* figdir)
   // PT DIST
   TCanvas *c1 = new TCanvas("c1", "", 2200, 1400);
   c1->SetGrid();
+  c1->SetLogy();
 
   TH1 *ptdist = (TH1F*)f->Get("ptdist");
   ptdist->SetTitle("");
@@ -32,6 +33,7 @@ void plot_analyzetree(const char* filename, const char* figdir)
   // TRACK NUMBER DIST
   TCanvas *c3 = new TCanvas("c3", "", 2200, 1400);
   c3->SetGrid();
+  c3->SetLogy();
 
   TH1 *ntrackdist = (TH1F*)f->Get("ntrackdist");
   ntrackdist->SetTitle("");

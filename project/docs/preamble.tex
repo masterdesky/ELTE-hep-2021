@@ -109,7 +109,8 @@
 	justification=justified,
 	format=plain
 ]{caption}	% Fig caption configuration
-\graphicspath{{/home/masterdesky/GitHub/ELTE_High_Energy_2021/project/analyzetree/figs/}}
+\usepackage{subcaption}
+\graphicspath{{/home/masterdesky/GitHub/ELTE_High_Energy_2021/project/figs/}}
 
 % Fit large images to same page with section titles
 \renewcommand{\textfraction}{0.01}
@@ -126,60 +127,5 @@
 %----------------------------------------------------------------------------------------
 % Using biblatex with bibtex backend and natbib citation styles (natbib=true, backend=bibtex)
 % In bibliography, citations are numbered by appearance (bibstyle=numeric)
-\usepackage[citestyle=authoryear, bibstyle=numeric, natbib=true, backend=bibtex, sorting=none]{biblatex}
+\usepackage[bibstyle=numeric, natbib=true, backend=bibtex, sorting=none]{biblatex}
 \addbibresource{bib/bibliography.bib}
-
-% Hyperlink both author and year in citations
-% Taken from stackexchange: https://tex.stackexchange.com/questions/1687/hyperlink-name-with-biblatex-authoryear/25972
-% The answer originates from here: https://groups.google.com/forum/#!topic/comp.text.tex/rSPhG2jd3Ks
-\DeclareCiteCommand{\cite}
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-   \printtext[bibhyperref]{\usebibmacro{cite}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
-
-\DeclareCiteCommand*{\cite}
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-   \printtext[bibhyperref]{\usebibmacro{citeyear}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
-
-\DeclareCiteCommand{\parencite}[\mkbibparens]
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-    \printtext[bibhyperref]{\usebibmacro{cite}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
-
-\DeclareCiteCommand*{\parencite}[\mkbibparens]
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-    \printtext[bibhyperref]{\usebibmacro{citeyear}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
-
-\DeclareCiteCommand{\footcite}[\mkbibfootnote]
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-  \printtext[bibhyperref]{ \usebibmacro{cite}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
-
-\DeclareCiteCommand{\footcitetext}[\mkbibfootnotetext]
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-   \printtext[bibhyperref]{\usebibmacro{cite}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
-
-\DeclareCiteCommand{\textcite}
-  {\boolfalse{cbx:parens}}
-  {\usebibmacro{citeindex}%
-   \printtext[bibhyperref]{\usebibmacro{textcite}}}
-  {\ifbool{cbx:parens}
-     {\bibcloseparen\global\boolfalse{cbx:parens}}
-     {}%
-   \multicitedelim}
-  {\usebibmacro{textcite:postnote}}

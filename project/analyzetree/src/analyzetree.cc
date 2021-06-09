@@ -13,6 +13,7 @@
 #include <TGraph.h>
 #include <TGraphErrors.h>
 #include <TMarker.h>
+#include <TLegend.h>
 #include <TStyle.h>
 #include <TCanvas.h>
 
@@ -234,10 +235,19 @@ phi_and_pt(particle_tree &p, int const &Nevents, int const &N_bins)
 }
 
 
-std::vector<double> fit_v2(TH1 *angdist)
+Double_t fit_func(Double_t *x, Double_t *par)
+{
+  return par[0] + 2*par[1]*cos(2*x[0]);
+}
+
+
+std::vector<double> fit_v2(TH1 *angdist, int i)
 {
   // Fitting function
-  TF1 *fit = new TF1("fit","[0]+2*[1]*cos(2*x)", 0, 2);
+  TF1 *fit = new TF1("fit",fit_func, 0, 2, 2);
+  fit->SetLineColor(kBlue);
+  fit->SetLineWidth(10);
+  fit->SetNpx(500);
   angdist->Fit("fit");
 
   double a = fit->GetParameter(0);
@@ -247,6 +257,20 @@ std::vector<double> fit_v2(TH1 *angdist)
 
   double v2 = b / (2*a);
   double ev2 = (eb/b + 2*ea/a) * v2;
+
+  if(i == 4 || i == 7 || i == 36 || i == 38)
+  {
+    // Plot fit
+    TCanvas *cf = new TCanvas("c", "", 2200, 1400);
+    cf->SetGrid();
+
+    angdist->SetTitle("");
+    angdist->GetXaxis()->SetTitle("phi [rad]");
+    angdist->GetYaxis()->SetTitle("N(phi)");
+    angdist->Draw("bar2");
+
+    cf->Print(Form("../figs/fit_%i.png",i));
+  }
 
   return { v2, ev2 };
 }
@@ -264,13 +288,13 @@ angle_distribution(std::vector<std::vector<double>> phi_per_pt,
     if(phi_per_pt[i].size() < 100) { v2[i] = 0; continue; }
 
     // Fill histogram
-    TH1 *angdist = new TH1F("angdist", "phi distribution", 250, -M_PI/2, M_PI/2);
+    TH1 *angdist = new TH1F("angdist", "angle distribution", 250, -M_PI/2, M_PI/2);
     for(auto const& phi_i : phi_per_pt[i])
     {
       angdist->Fill(phi_i);
     }
 
-    auto v2_fit = fit_v2(angdist);
+    auto v2_fit = fit_v2(angdist, i);
     v2[i] = v2_fit[0] / R;
     ev2[i] = v2_fit[1] / R;
 
