@@ -245,7 +245,7 @@ std::vector<double> fit_v2(TH1 *angdist, int i)
 {
   // Fitting function
   TF1 *fit = new TF1("fit",fit_func, 0, 2, 2);
-  fit->SetLineColor(kBlue);
+  fit->SetLineColor(kRed);
   fit->SetLineWidth(10);
   fit->SetNpx(500);
   angdist->Fit("fit");
@@ -255,8 +255,8 @@ std::vector<double> fit_v2(TH1 *angdist, int i)
   double ea = fit->GetParError(0);
   double eb = fit->GetParError(1);
 
-  double v2 = b / (2*a);
-  double ev2 = (eb/b + 2*ea/a) * v2;
+  double v2 = b / a;
+  double ev2 = (eb/b + ea/a) * v2;
 
   if(i == 4 || i == 7 || i == 36 || i == 38)
   {
@@ -264,10 +264,14 @@ std::vector<double> fit_v2(TH1 *angdist, int i)
     TCanvas *cf = new TCanvas("c", "", 2200, 1400);
     cf->SetGrid();
 
+    angdist->SetMarkerStyle(21);
+    angdist->SetMarkerSize(1.6);
+    angdist->SetStats(1);
+
     angdist->SetTitle("");
     angdist->GetXaxis()->SetTitle("phi [rad]");
     angdist->GetYaxis()->SetTitle("N(phi)");
-    angdist->Draw("bar2");
+    angdist->Draw("PE");
 
     cf->Print(Form("../figs/fit_%i.png",i));
   }

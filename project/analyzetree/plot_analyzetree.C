@@ -11,11 +11,14 @@ void plot_analyzetree(const char* filename, const char* figdir)
   c1->SetLogy();
 
   TH1 *ptdist = (TH1F*)f->Get("ptdist");
+  ptdist->SetMarkerStyle(21);
+  ptdist->SetMarkerSize(1.6);
+  ptdist->SetStats(1);
   ptdist->SetTitle("");
   ptdist->SetFillColor(kBlue);
   ptdist->GetXaxis()->SetTitle("p_{T} [GeV/c]");
   ptdist->GetYaxis()->SetTitle("N(p_{T}) [c/GeV]");
-  ptdist->Draw("bar2");
+  ptdist->Draw("PE");
   c1->Print(Form("%s/ptdist.png",figdir));
 
   // PHI DIST
@@ -23,11 +26,14 @@ void plot_analyzetree(const char* filename, const char* figdir)
   c2->SetGrid();
 
   TH1 *phidist = (TH1F*)f->Get("phidist");
+  phidist->SetMarkerStyle(21);
+  phidist->SetMarkerSize(1.6);
+  phidist->SetStats(1);
   phidist->SetTitle("");
   phidist->SetFillColor(kBlue);
   phidist->GetXaxis()->SetTitle("phi [rad]");
   phidist->GetYaxis()->SetTitle("N(phi)");
-  phidist->Draw("bar2");
+  phidist->Draw("PE");
   c2->Print(Form("%s/phidist.png",figdir));
 
   // TRACK NUMBER DIST
@@ -36,10 +42,13 @@ void plot_analyzetree(const char* filename, const char* figdir)
   c3->SetLogy();
 
   TH1 *ntrackdist = (TH1F*)f->Get("ntrackdist");
+  ntrackdist->SetMarkerStyle(21);
+  ntrackdist->SetMarkerSize(1.6);
+  ntrackdist->SetStats(1);
   ntrackdist->SetTitle("");
   ntrackdist->SetFillColor(kBlue);
   ntrackdist->GetXaxis()->SetTitle("Number of tracks");
   ntrackdist->GetYaxis()->SetTitle("Number of events");
-  ntrackdist->Draw("bar2");
+  ntrackdist->Draw("PE");
   c3->Print(Form("%s/ntrackdist.png",figdir));
 }
